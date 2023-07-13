@@ -1,6 +1,7 @@
 package me.pog5.ncombat;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -9,16 +10,25 @@ import java.util.Arrays;
 
 public class NCommand implements CommandExecutor {
     public NCombat nCombat;
+    public boolean state = true;
     public NCommand() {}
 
+    public boolean getState() {
+        return state;
+    }
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (command.getName().equalsIgnoreCase("ncombat")) {
             if (args.length == 1 && args[0].equalsIgnoreCase("toggle")) {
-                Bukkit.broadcastMessage("command: " + command + Arrays.toString(args) + "state: " + nCombat.enabled);
-                nCombat.enabled = !nCombat.enabled;
-                sender.sendMessage("NCombat is now " + (nCombat.isEnabled() ? "enabled" : "disabled"));
+                state = !state;
+                sender.sendMessage(ChatColor.AQUA + "NCombat is now " + (state ? ChatColor.GREEN + "enabled" : ChatColor.RED + "disabled"));
                 return true;
+            } else if (args.length >= 1 && args[0].equalsIgnoreCase("bypass")) {
+                if (args.length == 1) {
+                    sender.sendMessage(ChatColor.AQUA + "You are " + (state ? ChatColor.GREEN + "bypassing nCombat" : ChatColor.RED + "no longer bypassing nCombat"));
+                } else if (args[1].contains(Bukkit.getOnlinePlayers().toString())) {
+                    sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + Bukkit.getPlayer(args[1]) + ChatColor.AQUA + "is " + (state ? ChatColor.GREEN + "bypassing nCombat" : ChatColor.RED + "no longer bypassing nCombat"));
+                }
             }
         }
         return false;
