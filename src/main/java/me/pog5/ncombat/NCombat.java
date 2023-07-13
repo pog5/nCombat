@@ -30,7 +30,6 @@ public class NCombat extends JavaPlugin implements Listener {
         getCommand("ncombat").setExecutor(new NCommand());
     }
 
-
     @Override
     public void onDisable() {
         plugin = null;
