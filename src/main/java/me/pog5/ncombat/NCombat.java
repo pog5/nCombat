@@ -43,8 +43,7 @@ public class NCombat extends JavaPlugin implements Listener {
         if (!incombat && !event.isCancelled() && event.getDamager() instanceof Zombie && event.getEntity() instanceof Player) {
             Entity attacker = (Entity) event.getDamager();
             Player victim = (Player) event.getEntity();
-            //if (!timers.containsKey(attacker)) {
-            if (true) {
+            if (!timers.containsKey(attacker)) {
                 timers.put(attacker, 6);
                 victim.sendActionBar(ChatColor.RED + "In combat with " + ChatColor.BOLD + attacker.getName());
                 //attacker.sendActionBar(ChatColor.RED + "In combat with " + ChatColor.BOLD + victim.getName());
