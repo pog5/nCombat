@@ -53,7 +53,7 @@ public class NCombat extends JavaPlugin implements Listener {
                         if (timers.containsKey(attacker)) {
                             int secondspassed = timers.get(attacker) - 1;
                             if (secondspassed >= 1) {
-                                timers.put(attacker, secondspassed);
+                                timers.put(attacker, Math.max(timers.get(attacker) - 1, 1));
                                 victim.sendActionBar(ChatColor.RED + "In combat with " + ChatColor.BOLD + attacker.getName() + ChatColor.LIGHT_PURPLE + " | " + secondspassed + "s");
                                 //attacker.sendActionBar(ChatColor.RED + "In combat with " + ChatColor.BOLD + victim.getName() + ChatColor.LIGHT_PURPLE + " | " + secondspassed + "s");
                                 incombat = true;
