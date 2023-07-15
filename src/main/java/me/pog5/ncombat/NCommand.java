@@ -35,6 +35,11 @@ public class NCommand implements CommandExecutor {
                     sender.sendMessage(ChatColor.AQUA + "You are " + (bypassers.get(sender) ? ChatColor.GREEN : ChatColor.RED + "no longer ") + ChatColor.AQUA + "bypassing nCombat");
                     return true;
                 } else if (args[1].contains(Bukkit.getOnlinePlayers().toString())) {
+                    if (bypassers.get(Bukkit.getPlayer(args[1])) == null) {
+                        bypassers.put(Bukkit.getPlayer(args[1]), true);
+                    } else {
+                        bypassers.put(Bukkit.getPlayer(args[1]), !bypassers.get(Bukkit.getPlayer(args[1])));
+                    }
                     sender.sendMessage(ChatColor.AQUA + "" + ChatColor.BOLD + Bukkit.getPlayer(args[1]) + ChatColor.AQUA + "is " + (state ? ChatColor.GREEN + "bypassing nCombat" : ChatColor.RED + "no longer bypassing nCombat"));
                 }
             }
